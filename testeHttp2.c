@@ -10,7 +10,7 @@
 #include "hardware/pwm.h"
 #include "pico/cyw43_arch.h"
 #include "lwip/tcp.h"
-#include "lib/ssd1306.h" // Inclua o cabeçalho do SSD1306
+#include "lib/ssd1306.h" 
 #include "lib/ws2812.pio.h"
 #include "lib/matrix.h"
 
@@ -19,14 +19,14 @@
 #define UART_TX 0
 #define UART_RX 1
 #define BAUD_RATE 115200
-#define BUZZER_PIN 21 // Definição do pino do buzzer
+#define BUZZER_PIN 21 // pino do buzzer
 #define IS_RGBW false
 #define BUZZER_FREQ_HIGH 2000 // Frequência alta para estado negativo
-#define BUTTON_A_PIN 5 // Pino do botão A
-#define BUTTON_B_PIN 6 // Pino do botão B
-#define LED_PIN 12 // Pino do LED
-#define WIFI_SSID "G3" // Substitua pelo nome da sua rede Wi-Fi
-#define WIFI_PASS "marciaeglaube" // Substitua pela senha da sua rede Wi-Fi
+#define BUTTON_A_PIN 5 // Pino btn A
+#define BUTTON_B_PIN 6 // Pino btn B
+#define LED_PIN 12 // led
+#define WIFI_SSID "G3" // local onde vc declara o nome da rede(protocolo http)
+#define WIFI_PASS "marciaeglaube" // senha da rede
 
 // Faixas ideais dos sensores
 #define PH_MIN 5.5
@@ -82,7 +82,7 @@ bool atualizar_matriz(PIO pio, int sm, float ph, float cond, float temp, float n
     return status_ok;
 }
 
-// Função para simular leituras alternadas entre "Tudo Ok" e "Fora do Padrão"
+// função simulação de leituras alternadas
 void simular_leitura_alternada(float *ph, float *cond, float *temp, float *nivel, bool *alternar) {
     if (*alternar) {
         // Valores dentro das faixas ideais (Tudo Ok)
@@ -233,7 +233,7 @@ int main() {
     ws2812_program_init(pio, sm, offset, WS2812_PIN, 800000, IS_RGBW);
 
     bool running = false;
-    bool alternar = true; // Variável para alternar entre "Tudo Ok" e "Fora do Padrão"
+    bool alternar = true; 
 
     while (true) {
         if (!gpio_get(BUTTON_A_PIN)) {
